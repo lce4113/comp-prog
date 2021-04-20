@@ -1,0 +1,7 @@
+# ccls stuff
+.ccls
+.ccls-cache/
+
+# Compiled Files
+output
+a.out
