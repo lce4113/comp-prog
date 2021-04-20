@@ -1,6 +1,7 @@
-# ccls stuff
+# LSP stuff
 .ccls
 .ccls-cache/
+.clang-format
 
 # Compiled Files
 output
