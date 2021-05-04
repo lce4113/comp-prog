@@ -1,4 +1,4 @@
-// ––– Round #714: Problem D –––
+// ––– Round #718: Problem C –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,8 @@ using vl = vector<ll>;
 
 int main()
 {
-  int arr2;
-  cin >> arr2;
+  int n;
+  cin >> n;
 
 
 }

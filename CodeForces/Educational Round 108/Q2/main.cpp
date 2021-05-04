@@ -1,4 +1,4 @@
-// ––– Round #714: Problem D –––
+// ––– Educational Round 108: Problem B –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,16 @@ using vl = vector<ll>;
 
 int main()
 {
-  int arr2;
-  cin >> arr2;
+  int t;
+  cin >> t;
 
-
+  for (int i = 0; i < t; i++) {
+    int n, m, k;
+    cin >> n >> m >> k;
+    if (n * m - 1 == k) {
+      cout << "YES" << endl;
+    } else {
+      cout << "NO" << endl;
+    }
+  }
 }

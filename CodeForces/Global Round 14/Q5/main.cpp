@@ -1,4 +1,4 @@
-// ––– Round #714: Problem D –––
+// ––– CodeForces Global Round 14: Problem E –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,12 @@ using vl = vector<ll>;
 
 int main()
 {
-  int arr2;
-  cin >> arr2;
+  pair<int, int> arr[3];
+  for (int i = 0; i < 3; i++) {
+    cin >> arr[i].f >> arr[i].s;
+  }
 
-
+  for (int i = 0; i < 3; i++) {
+    cout << arr[i].f << ' ' << arr[i].s << endl;
+  }
 }
