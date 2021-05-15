@@ -1,4 +1,4 @@
-// ––– ProCo Novice 2020: Problem C –––
+// ––– CSES Apartments –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,20 @@ using vl = vector<ll>;
 
 int main()
 {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0); cout.tie(0);
+  cin.tie(0)->sync_with_stdio(0);
+
+  int n, m, k;
+  cin >> n >> m >> k;
+
+  int a[n];
+  for (int i = 0; i < n; i++) {
+    cin >> a[i];
+  }
+
+  int b[m];
+  for (int i = 0; i < m; i++) {
+    cin >> b[i];
+  }
 
 
 }

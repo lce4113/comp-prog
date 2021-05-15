@@ -1,4 +1,4 @@
-// ––– ProCo Novice 2020: Problem C –––
+// ––– ProCo Advanced 2020: Problem A –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,8 @@ using vl = vector<ll>;
 
 int main()
 {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0); cout.tie(0);
+  int n;
+  cin >> n;
 
-
+  
 }

@@ -1,4 +1,4 @@
-// ––– ProCo Novice 2020: Problem C –––
+// ––– CSES Distinct Numbers –––
 
 #include <bits/stdc++.h>
 
@@ -17,8 +17,17 @@ using vl = vector<ll>;
 
 int main()
 {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0); cout.tie(0);
+  cin.tie(0)->sync_with_stdio(0);
 
+  int n;
+  cin >> n;
 
+  set<int> nums;
+  for (int i = 0; i < n; i++) {
+    int elt;
+    cin >> elt;
+    nums.insert(elt);
+  }
+
+  cout << nums.size() << endl;
 }
