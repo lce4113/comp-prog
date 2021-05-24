@@ -1,6 +1,10 @@
 // ––– CSES Concert Tickets –––
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <set>
 
 using namespace std;
 
@@ -32,39 +36,21 @@ int main()
     cin >> x;
     t.insert(x);
   }
-  pi c[m];
+  int c[m];
   for (int i = 0; i < m; i++) {
     int x;
     cin >> x;
-    c[i] = mp(x, i);
+    c[i] = x;
   }
-
-  sort(c, c + m, cmp);
 
   for (int i = 0; i < m; i++) {
-    cout << c[i].f << ' ' << c[i].s << '\n';
-  }
-  cout << '\n';
-
-  for (auto i = t.begin(); i != t.end(); i++) {
-    cout << *i << ' ';
-  }
-  cout << '\n';
-
-  int ans[m];
-  for (int i = 0; i < m; i++) {
-    auto r = t.upper_bound(c[i].f);
-    if (*r == *t.rbegin()) {
-      ans[c[i].s] = -1;
+    auto r = t.upper_bound(c[i]);
+    if (r == t.begin()) {
+      cout << -1 << '\n';
       continue;
     }
     auto l = prev(r);
-    cout << *r << ' ' << *l << '\n';
-    ans[c[i].s] = *t.rbegin();
-    t.erase(t.find(*l));
-  }
-
-  for (int i = 0; i < m; i++) {
-    cout << ans[i] << '\n';
+    cout << *l << '\n';
+    t.erase(l);
   }
 }

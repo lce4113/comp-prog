@@ -34,6 +34,9 @@ int main()
   while (t--) {
     int q;
     cin >> q;
-    cout << p[q] - 1 << '\n';
+    if (q >= n)
+      cout << s << '\n';
+    else
+      cout << p[q] - 1 << '\n';
   }
 }

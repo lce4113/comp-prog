@@ -19,18 +19,30 @@ int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
-  int n, m, k;
+  ll n, m, k;
   cin >> n >> m >> k;
 
-  int a[n];
-  for (int i = 0; i < n; i++) {
+  ll a[n];
+  for (ll i = 0; i < n; i++) {
     cin >> a[i];
   }
 
-  int b[m];
-  for (int i = 0; i < m; i++) {
+  ll b[n];
+  for (ll i = 0; i < m; i++) {
     cin >> b[i];
   }
 
+  sort(a, a + n);
+  sort(b, b + m);
 
+  ll ans = 0;
+  for (ll i = 0, l = 0; i < n && l < m;) {
+    if (b[l] < a[i] - k)
+      l++;
+    else if (b[l] > a[i] + k)
+      i++;
+    else
+      ans++, i++, l++;
+  }
+  cout << ans << '\n';
 }
