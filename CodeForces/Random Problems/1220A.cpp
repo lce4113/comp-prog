@@ -1,4 +1,4 @@
-// ––– HEADER –––
+// ––– CodeForces Cards: Problem A –––
 
 #include <bits/stdc++.h>
 
@@ -19,24 +19,23 @@ int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
-  int n, q;
-  cin >> n >> q;
+  int n;
+  cin >> n;
 
-  int pfs[n + 1];
-  pfs[0] = 0;
+  int z = 0, o = 0;
   for (int i = 0; i < n; i++) {
-    int x;
+    char x;
     cin >> x;
-    pfs[i + 1] = pfs[i] + x;
+    if (x == 'z')
+      z++;
+    else if (x == 'n')
+      o++;
   }
 
-  while (q--) {
-    int l, r;
-    cin >> l >> r;
-
-    int a = pfs[r] - pfs[l - 1];
-    int b = r - l + 1;
-    int ans = pfs[n] - a + (b - a);
-    cout << ans << '\n';
+  for (int i = 0; i < o; i++) {
+    cout << 1 << ' ';
+  }
+  for (int i = 0; i < z; i++) {
+    cout << 0 << ' ';
   }
 }

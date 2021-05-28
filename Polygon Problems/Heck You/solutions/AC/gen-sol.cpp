@@ -14,27 +14,26 @@ using pi = pair<int, int>;
 using pl = pair<ll, ll>;
 
 const int MOD = 1e9 + 7;
+const int MAXN = 1e6 + 1;
+
+ll pfs1[MAXN], pfs2[MAXN];
+int n, t, x, a, b, r;
 
 int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
-  int n, t;
   cin >> n >> t;
-  cout << t << '\n';
 
-  int c[n];
-  ll pfs1[n + 1], pfs2[n + 1];
   pfs1[0] = 0;
   pfs2[0] = 0;
   for (int i = 0; i < n; i++) {
-    cin >> c[i];
-    pfs1[i + 1] = pfs1[i] + c[i];
-    pfs2[i + 1] = pfs2[i] + (1 + i) * c[i];
+    cin >> x;
+    pfs1[i + 1] = pfs1[i] + x;
+    pfs2[i + 1] = pfs2[i] + (1 + i) * x;
   }
 
   while (t--) {
-    int a, b, r;
     cin >> a >> b >> r;
 
     ll hugs1 = pfs1[b] - pfs1[a - 1];
@@ -43,6 +42,6 @@ int main()
     ll subRect = hugs1 * (a - 1) * r;
     ll ans = (scaledHugs - subRect) % MOD;
 
-    cout << pfs1[1] << '\n';
+    cout << ans << '\n';
   }
 }

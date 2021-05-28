@@ -4,10 +4,20 @@
 
 using namespace std;
 
-const int MOD = 1e9 + 7;
+#define f first
+#define s second
+#define mp make_pair
+#define pb push_back
+using str = string;
+using ll = long long;
+using pi = pair<int, int>;
+using pl = pair<ll, ll>;
 
-long long pfs1[1000001], pfs2[1000001];
-int c[100000], n, t, x, a, b, r;
+const int MOD = 1e9 + 7;
+const int MAXN = 1e6 + 1;
+
+ll pfs1[MAXN], pfs2[MAXN];
+int n, t, x, a, b, r;
 
 int main()
 {
@@ -19,7 +29,6 @@ int main()
   pfs2[0] = 0;
   for (int i = 0; i < n; i++) {
     cin >> x;
-    c[i] = x;
     pfs1[i + 1] = pfs1[i] + x;
     pfs2[i + 1] = pfs2[i] + (1 + i) * x;
   }

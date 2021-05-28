@@ -1,4 +1,4 @@
-// ––– HEADER –––
+// ––– CodeForces Required Remainder: Problem A –––
 
 #include <bits/stdc++.h>
 
@@ -19,24 +19,13 @@ int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
-  int n, q;
-  cin >> n >> q;
-
-  int pfs[n + 1];
-  pfs[0] = 0;
-  for (int i = 0; i < n; i++) {
-    int x;
-    cin >> x;
-    pfs[i + 1] = pfs[i] + x;
-  }
-
-  while (q--) {
-    int l, r;
-    cin >> l >> r;
-
-    int a = pfs[r] - pfs[l - 1];
-    int b = r - l + 1;
-    int ans = pfs[n] - a + (b - a);
+  int t;
+  cin >> t;
+  while (t--) {
+    ll a, b, c;
+    cin >> a >> b >> c;
+    int ans = c - (c % a) + b;
+    if (ans > c) ans -= a;
     cout << ans << '\n';
   }
 }
