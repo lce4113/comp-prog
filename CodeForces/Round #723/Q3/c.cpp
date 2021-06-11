@@ -19,5 +19,22 @@ int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
+  int n;
+  cin >> n;
+  priority_queue<ll, vector<ll>, greater<ll>> pq;
+  ll S = 0;
 
+  for (int i = 1; i <= n; i++) {
+    ll x;
+    cin >> x;
+    S += x;
+    pq.push(x);
+
+    while (S < 0) {
+      S -= pq.top();
+      pq.pop();
+    }
+  }
+
+  cout << pq.size();
 }
