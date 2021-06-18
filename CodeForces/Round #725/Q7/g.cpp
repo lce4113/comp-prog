@@ -1,4 +1,4 @@
-// ––– CodeForces Round #725: Problem F –––
+// ––– CodeForces Round #725: Problem G –––
 
 #include <bits/stdc++.h>
 

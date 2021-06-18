@@ -6,7 +6,6 @@ read -p "Contest Name (Round #720): " CONTEST
 read -p "Number of Problems [6]: " NUMBER_OF_PROBLEMS
 NUMBER_OF_PROBLEMS=${NUMBER_OF_PROBLEMS:-6}
 
-
 mkdir "$CONTEST"
 cd "$CONTEST"
 

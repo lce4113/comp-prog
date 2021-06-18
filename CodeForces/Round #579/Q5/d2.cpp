@@ -19,5 +19,29 @@ int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
+  str s, t;
+  cin >> s >> t;
 
+  int n = s.length(), m = t.length();
+  int rg[m];
+  for (int i = n - 1, k = m - 1; i >= 0; i--) {
+    if (s[i] == t[k]) {
+      rg[k] = i;
+      k--;
+    }
+  }
+
+  int ans = 0;
+  for (int i = 0, k = 0; i < n; i++) {
+    if (k == m) {
+      ans = max(ans, n - i);
+    } else {
+      ans = max(ans, rg[k] - i);
+    }
+    if (k < m && s[i] == t[k]) {
+      k++;
+    }
+  }
+
+  cout << ans << '\n';
 }
