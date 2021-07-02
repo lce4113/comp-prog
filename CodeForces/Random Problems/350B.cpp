@@ -1,4 +1,4 @@
-// ––– CodeForces Contest 1060, Problem B: "Maximum Sum of Digits" –––
+// ––– CodeForces Contest 350, Problem B: "Resort" –––
 
 #include <bits/stdc++.h>
 
@@ -15,31 +15,26 @@ using pl = pair<ll, ll>;
 using vi = vector<int>;
 using vl = vector<ll>;
 
-ll S(ll n)
-{
-  ll sm = 0;
-  while (n) {
-    sm += n % 10;
-    n /= 10;
-  }
-  return sm;
-}
-
 int main()
 {
   cin.tie(0)->sync_with_stdio(0);
 
-  ll n;
+  int n;
   cin >> n;
 
-  ll N = n, l = 1;
-  for (; N; l *= 10) {
-    N /= 10;
+  int a[n];
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    a[i] = x;
   }
-  l /= 10;
 
-  ll a = n - (n % l) - 1;
-  ll b = n - a;
+  int b[n];
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    b[i] = x;
+  }
 
-  cout << S(a) + S(b) << '\n';
+
 }
