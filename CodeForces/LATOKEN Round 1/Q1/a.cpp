@@ -25,49 +25,50 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    char arr[n][m];
-    int a = -1, b;
+    char arr[n][m], a = -1;
     for (int i = 0; i < n; i++) {
       for (int k = 0; k < m; k++) {
         char x;
         cin >> x;
         arr[i][k] = x;
-        b = (i - k) % 2;
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      for (int k = 0; k < m; k++) {
+        int x = arr[i][k];
         if (x == 'R') {
-          if (a != -1 && a != b) {
+          int b = abs(k - i) % 2;
+          if (a == -1) {
+            a = b;
+          } else if (a != b) {
             goto done;
           }
-          a = b;
-        }
-        if (x == 'W') {
-          if (a != -1 && a != 1 - b) {
+        } else if (x == 'W') {
+          int b = 1 - (abs(k - i) % 2);
+          if (a == -1) {
+            a = b;
+          } else if (a != b) {
             goto done;
           }
-          a = 1 - b;
         }
       }
+    }
+
+    if (a == -1) {
+      a = 0;
     }
 
     cout << "YES" << '\n';
     for (int i = 0; i < n; i++) {
       for (int k = 0; k < m; k++) {
-        if (arr[i][k] == '.') {
-          int b = (i - k) % 2;
-          if ((a == 1 && b == 1) || (a == 0 && b == 0)) {
-            cout << "R";
-          } else {
-            cout << "W";
-          }
-        } else {
-          cout << arr[i][k];
-        }
+        int b = abs(k - i) % 2;
+        cout << ((a == 1 && b == 1 || a == 0 && b == 0) ? 'R' : 'W');
       }
       cout << '\n';
     }
-    cout << '\n';
     continue;
 done:
     cout << "NO" << '\n';
-
   }
 }

@@ -7,8 +7,8 @@ read -p "Problem Letter (A): " PROBLEM
 read -p "Problem Name (Heck You): " PROBLEM_NAME
 
 FILE_NAME="$CONTEST_ID$PROBLEM.cpp"
-HEADER="CodeForces Contest $CONTEST_ID, Problem $PROBLEM: \"$PROBLEM_NAME\""
-CP_PATH=~/Google\ Drive/OmMahesh/Programming/Templates/Comp\ Prog/main.cpp
+HEADER="https:\/\/codeforces.com\/contest\/$CONTEST_ID\/problem\/$PROBLEM - \"$PROBLEM_NAME\""
+CP_PATH=~/Google\ Drive/OmMahesh/Programming/Comp\ Prog/Templates/std\ io/main.cpp
 
 cp "$CP_PATH" "$FILE_NAME"
 sed -i '' "s/HEADER/$HEADER/" "$FILE_NAME"

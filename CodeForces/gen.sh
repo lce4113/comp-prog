@@ -9,7 +9,7 @@ NUMBER_OF_PROBLEMS=${NUMBER_OF_PROBLEMS:-6}
 mkdir "$CONTEST"
 cd "$CONTEST"
 
-CP_PATH=~/Google\ Drive/OmMahesh/Programming/Templates/Comp\ Prog/
+CP_PATH=~/Google\ Drive/OmMahesh/Programming/Comp\ Prog/Templates/std\ io
 
 letters=( 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z' )
 for (( i = 0; i < $NUMBER_OF_PROBLEMS; i++ )); do

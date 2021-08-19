@@ -22,19 +22,53 @@ int main()
   int n;
   cin >> n;
 
-  int a[n];
-  for (int i = 0; i < n; i++) {
+  map<int, vi> a;
+  for (int i = 1; i <= n; i++) {
     int x;
     cin >> x;
-    a[i] = x;
+    if (x) {
+      vi y;
+      y.pb(i);
+      a[i] = y;
+    }
   }
 
-  int b[n];
-  for (int i = 0; i < n; i++) {
+  int b[n + 1];
+  set<int> c, d;
+  for (int i = 1; i <= n; i++) {
     int x;
     cin >> x;
     b[i] = x;
+    if (c.count(x)) {
+      d.insert(x);
+    }
+    c.insert(x);
   }
 
+  for (int i = 1; i <= n; i++) {
+    if (d.count(b[i])) {
+      b[i] = 0;
+    }
+  }
 
+  int m = -1;
+  for (auto& x : a) {
+    int e = x.f;
+    while (true) {
+      e = b[e];
+      if (a[e].size() == 1 || e == 0) {
+        break;
+      }
+      x.s.pb(e);
+    }
+    if (x.s.size() > a[m].size()) {
+      m = x.f;
+    }
+  }
+
+  cout << a[m].size() << '\n';
+  for (int i = a[m].size() - 1; i >= 0; i--) {
+    cout << a[m][i] << ' ';
+  }
+  cout << '\n';
 }

@@ -9,12 +9,7 @@ FILE_IO=${FILE_IO:-No}
 mkdir "$CONTEST"
 cd "$CONTEST"
 
-if [ $FILE_IO == "No" ]; then
-  CP_PATH=~/Google\ Drive/OmMahesh/Programming/Templates/Comp\ Prog/
-  echo "hEhE"
-else
-  CP_PATH=~/Google\ Drive/OmMahesh/Programming/Templates/Comp\ Prog\ File\ IO/
-fi
+CP_PATH=~/Google\ Drive/OmMahesh/Programming/Comp\ Prog/Templates/std\ io
 
 letters=( 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z' )
 for (( i = 0; i < 3; i++ )); do
@@ -28,5 +23,9 @@ for (( i = 0; i < 3; i++ )); do
   cp -R "$CP_PATH" "$DIR_NAME"
   mv "$DIR_NAME/main.cpp" "$DIR_NAME/$FILE_NAME.cpp"
   sed -i '' "s/HEADER/$HEADER/" "$DIR_NAME/$FILE_NAME.cpp"
+
+  if [ $FILE_IO == "Yes" ]; then
+    sed -i '' "s/stdIO();/fileIO(\"FILE_NAME\");/" "$DIR_NAME/$FILE_NAME.cpp"
+  fi
 
 done
