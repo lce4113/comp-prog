@@ -1,4 +1,4 @@
-// ––– HEADER –––
+// ––– CodeForces Round #741: Problem C –––
 
 // TEMPLATE {{{
 

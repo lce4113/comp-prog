@@ -1,4 +1,4 @@
-// ––– HEADER –––
+// ––– CodeForces Round #710: Problem G –––
 
 // TEMPLATE {{{
 
@@ -11,14 +11,9 @@ using namespace std;
 #define tcTT template <class... T>
 #define tcTU template <class T, class U>
 #define tcTUU template <class T, class... U>
-#define tcTUV template <class T, class U, class V>
-#define tcTUVV template <class T, class U, class... V>
 #define tcS template <size_t S>
 #define tcTS template <class T, size_t S>
 #define tcTUS template <class T, class U, size_t S>
-#define tcTSUU template <class T, size_t S, class... U>
-#define tcTSUV template <class T, size_t S, class U, class V>
-#define tcTSUVV template <class T, size_t S, class U, class... V>
 #define tcTV template <class T, class = void>
 
 tcT using V = vector<T>;
@@ -105,20 +100,9 @@ using dq = DQ<int>;
 
 // }}}
 
-// Mod Calculations {{{
+// Loops {{{
 
-const int MOD = 1e9 + 7;
-tcT int mod(T n) { rtn(n % MOD); }
-
-bool is_mod();
-tcTU T add(T a, U b) { rtn is_mod() ? mod(a + b) : a + b; };
-tcTU T mult(T a, U b) { rtn is_mod() ? mod(mod(a) * mod(b)) : (a * b); };
-
-  // }}}
-
-  // Loops {{{
-
-#define FOR4(i, a, b, c) for (int i = (a); i < (b); i = add(i, c))
+#define FOR4(i, a, b, c) for (int i = (a); i < (b); i += (c))
 #define FOR3(i, a, b) FOR4(i, a, b, 1)
 #define FOR2(i, b) FOR3(i, 0, b)
 #define FOR1(n) FOR2(_, n)
@@ -147,6 +131,9 @@ tcTU T mult(T a, U b) { rtn is_mod() ? mod(mod(a) * mod(b)) : (a * b); };
 // }}}
 
 // Constants {{{
+
+const int MOD = 1e9 + 7;
+tcT int mod(T n) { rtn(n % MOD); }
 
 const ll INF = 1e18;
 const db PI = acos((db)-1);
@@ -261,7 +248,7 @@ tcT void in(M<T, int> &a, int n) {
   rep(n) {
     T x;
     in(x);
-    a[x] = add(a[x], 1);
+    a[x]++;
   }
 }
 
@@ -418,16 +405,22 @@ tcT struct C {
 };
 
 // factorial function
-tcT ll fact(T n) {
+tcT ll fact(T n, bool m = true) {
   ll res = 1;
-  FOR(i, 2, add(n, 1)) res = mult(res, i);
+  FOR(i, 2, n + 1) {
+    res *= i;
+    if (m) res %= MOD;
+  }
   rtn res;
 }
 
 // exponent function
-tcT T exp(T a, T b) {
+tcT T exp(T a, T b, bool m = true) {
   T res = 1;
-  FOR(b) res = mult(res, a);
+  FOR(b) {
+    res *= a;
+    if (m) res %= m;
+  }
   rtn res;
 }
 
@@ -435,51 +428,19 @@ tcT T exp(T a, T b) {
 tcT M<T, T> pfac(T a) {
   M<T, T> ans;
   T n = a;
-  for (int i = 2; mult(i, i) <= a; i = add(i, 1)) {
+  for (int i = 2; i * i <= a; i++) {
     while (n % i == 0) {
       n /= i;
-      ans[i] = add(ans[i], 1);
+      ans[i]++;
     }
   }
-  if (n > 1) ans[n] = add(ans[n], 1);
+  if (n > 1) ans[n]++;
   rtn ans;
 }
 
 // }}}
 
 // Other Functions {{{
-
-// search through a sorted vector with binary search
-tcT int se(V<T> a, T b) {
-  if (b < a[0]) rtn 0;
-  int m, l = 0, r = sz(a);
-  while (r - l > 1) {
-    m = (l + r) / 2;
-    if (b == a[m])
-      rtn m;
-    else if (b > a[m])
-      l = m;
-    else
-      r = m;
-  }
-  rtn r;
-}
-
-// get the lower bound of se
-tcT int lse(V<T> a, T b) {
-  int c = se(a, b);
-  c--;
-  while (a[c] == b && c >= 0) c--;
-  rtn(c + 1);
-}
-
-// get the upper bound of se
-tcT int use(V<T> a, T b) {
-  int c = se(a, b);
-  c++;
-  while (a[c] == b && c < sz(a)) c++;
-  rtn(c - 1);
-}
 
 // add indices to a vector/array
 tcT V<P<T, int>> addind(V<T> a) {
@@ -522,21 +483,20 @@ tcTU void fill(V<T> &a, U b) { each(a, x) fill(x, b); }
 tcT bool eq(T a, T b, T eps = 0.00001) { rtn abs(a - b) < eps; }
 
 // swap two variables
-#define swap(a, b) \
-  {                \
-    auto tmp = a;  \
-    a = b;         \
-    b = tmp;       \
-  }
+tcT void swap(T &a, T &b) {
+  T tmp = a;
+  a = b;
+  b = tmp;
+}
 
 // get the number of even and odd numbers in a vector/array
 tcT pi EO(V<T> a) {
   int E = 0, O = 0;
   each(a, x) {
     if (x % 2)
-      O = add(O, 1);
+      O++;
     else
-      E = add(E, 1);
+      E++;
   }
   rtn{E, O};
 }
@@ -545,12 +505,83 @@ tcTS pi EO(A<T, S> a) {
   int E = 0, O = 0;
   each(a, x) {
     if (x % 2)
-      O = add(O, 1);
+      O++;
     else
-      E = add(E, 1);
+      E++;
   }
   rtn{E, O};
 }
+
+// Sum {{{
+
+// get the sum of values (plain integers, vectors, arrays, etc.)
+
+tcT T sum(bool m, T a) { rtn(m ? mod(a) : a); }
+tcT T sum(T a) { rtn sum(false, a); }
+
+tcTUU T sum(bool m, T a, U... b) {
+  T res = sum(m, a) + sum(m, b...);
+  if (m) res %= MOD;
+  rtn res;
+}
+tcTUU T sum(T a, U... b) { rtn sum(false, a, b...); }
+
+tcT T sum(V<T> a, bool m = false) {
+  T res = 0;
+  each(a, x) {
+    res += x;
+    if (m) res %= MOD;
+  }
+  rtn res;
+}
+
+tcTS T sum(A<T, S> a, bool m = false) {
+  T res = 0;
+  each(a, x) {
+    res += x;
+    if (m) res %= MOD;
+  }
+  rtn res;
+}
+
+tcT T sum(S<T> a, bool m = false) {
+  T res = 0;
+  each(a, x) {
+    res += x;
+    if (m) res %= MOD;
+  }
+  rtn res;
+}
+
+tcT T sum(MS<T> a, bool m = false) {
+  T res = 0;
+  each(a, x) {
+    res += x;
+    if (m) res %= MOD;
+  }
+  rtn res;
+}
+
+tcTU U sum(M<T, U> a, bool m = false) {
+  U res = 0;
+  each(a, x) {
+    res += x.s;
+    if (m) res %= MOD;
+  }
+  rtn res;
+}
+
+tcTU T sum(PQU<T, U> a, bool m = false) {
+  auto b = copy(a);
+  T res = 0;
+  while (sz(b)) {
+    res += b.top(), b.pop();
+    if (m) res %= MOD;
+  }
+  rtn b;
+}
+
+// }}}
 
 // Copy {{{
 
@@ -605,82 +636,11 @@ tcTU PQU<T, U> copy(PQU<T, U> a) {
 
 // }}}
 
-// Sum {{{
-
-// get the sum of values (plain integers, vectors, arrays, etc.)
-
-tcT T sum(V<T> a, bool m = false) {
-  T res = 0;
-  each(a, x) {
-    res = add(res, x);
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcTS T sum(A<T, S> a, bool m = false) {
-  T res = 0;
-  each(a, x) {
-    res = add(res, x);
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcT T sum(S<T> a, bool m = false) {
-  T res = 0;
-  each(a, x) {
-    res = add(res, x);
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcT T sum(MS<T> a, bool m = false) {
-  T res = 0;
-  each(a, x) {
-    res = add(res, x);
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcTU U sum(M<T, U> a, bool m = false) {
-  U res = 0;
-  each(a, x) {
-    res = add(res, x.s);
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcTU T sum(PQU<T, U> a, bool m = false) {
-  auto b = copy(a);
-  T res = 0;
-  while (sz(b)) {
-    res = add(res, b.top()), b.pop();
-    if (m) res %= MOD;
-  }
-  rtn res;
-}
-
-tcT T sum(T a) { rtn a; }
-tcTUU T sum(T a, U... b) { rtn add(sum(a), sum(b...)); }
-tcTUVV T sum(P<T, U> a, V... b) { rtn add(sum(a), sum(b...)); }
-tcTUU T sum(V<T> a, U... b) { rtn add(sum(a), sum(b...)); }
-tcTSUU T sum(A<T, S> a, U... b) { rtn add(sum(a), sum(b...)); }
-tcTUU T sum(S<T> a, U... b) { rtn add(sum(a), sum(b...)); }
-tcTUU T sum(MS<T> a, U... b) { rtn add(sum(a), sum(b...)); }
-tcTUVV T sum(PQU<T, U> a, V... b) { rtn add(sum(a), sum(b...)); }
-tcTUVV T sum(M<T, U> a, V... b) { rtn add(sum(a), sum(b...)); }
-
-// }}}
-
 // Min/Max {{{
 
 tcT vi amaxi(T a) {
   vi mi{0};
-  FOR(i, 1, sz(a)) {
+  FOR(i, sz(a)) {
     if (a[i] > a[mi[0]])
       mi.clear(), mi.pb(i);
     else if (a[i] == a[mi[0]])
@@ -691,7 +651,7 @@ tcT vi amaxi(T a) {
 
 tcT vi amini(T a) {
   vi mi{0};
-  FOR(i, 1, sz(a)) {
+  FOR(i, sz(a)) {
     if (a[i] < a[mi[0]])
       mi.clear(), mi.pb(i);
     else if (a[i] == a[mi[0]])
@@ -700,18 +660,21 @@ tcT vi amini(T a) {
   rtn mi;
 }
 
-tcT int maxi(T a) { rtn amaxi(a)[0]; }
-tcT int mini(T a) { rtn amini(a)[0]; }
+tcT T maxi(T a) { rtn amaxi(a)[0]; }
+tcT T mini(T a) { rtn amini(a)[0]; }
 
-tcT T max(V<T> a) { rtn a[maxi(a)]; }
-tcT T max(S<T> a) { rtn *a.rbegin(); }
-tcT T max(MS<T> a) { rtn *a.rbegin(); }
+tcT T max(T a) { rtn a[maxi(a)]; }
+tcT T max(S<T> a) { rtn a.rbegin(); }
+tcT T max(MS<T> a) { rtn a.rbegin(); }
 
-tcT T min(V<T> a) { rtn a[mini(a)]; }
-tcT T min(S<T> a) { rtn *a.begin(); }
-tcT T min(MS<T> a) { rtn *a.begin(); }
+tcT T min(T a) { rtn a[mini(a)]; }
+tcT T min(S<T> a) { rtn a.begin(); }
+tcT T min(MS<T> a) { rtn a.begin(); }
 
+tcT T min(T a, T b) { rtn(a <= b ? a : b); }
 tcTUU T min(T a, U... b) { rtn min(a, min(b...)); }
+
+tcT T max(T a, T b) { rtn(a >= b ? a : b); }
 tcTUU T max(T a, U... b) { rtn min(a, min(b...)); }
 
 // }}}
@@ -739,15 +702,15 @@ tcT struct Seg {
     ROF(i, n, 1) calc(i);
   }
 
-  void calc(int i) { seg[i] = comb(seg[2 * i], seg[add(2 * i, 1)]); }
+  void calc(int i) { seg[i] = comb(seg[2 * i], seg[2 * i + 1]); }
 
   void u(int i, T val) {
     assert(i >= 0), assert(i < n);
-    i = add(i, n), seg[i] = val;
+    seg[i += n] = val;
     for (i /= 2; i; i /= 2) calc(i);
   }
 
-  T q(int L) { rtn q(L, add(L, 1)); }
+  T q(int L) { rtn q(L, L + 1); }
   T q(int L, int R) { rtn q(L, R, 0, n, 1); }
   T q(int L, int R, int l, int r, int i) {
     assert(L >= 0), assert(L < n);
@@ -755,8 +718,8 @@ tcT struct Seg {
     if (l >= R || r <= L) rtn ID;
     if (l >= L && r <= R) rtn seg[i];
     T ans = ID;
-    ans = comb(ans, q(L, R, l, add(l, r) / 2, 2 * i));
-    ans = comb(ans, q(L, R, add(l, r) / 2, r, add(2 * i, 1)));
+    ans = comb(ans, q(L, R, l, (l + r) / 2, 2 * i));
+    ans = comb(ans, q(L, R, (l + r) / 2, r, 2 * i + 1));
     rtn ans;
   }
 };
@@ -794,11 +757,6 @@ int32_t main() {
 
 bool TC() {
   /* rtn true; // Uncomment this line for multiple test cases */
-  rtn false;
-}
-
-bool is_mod() {
-  /* rtn true; // Uncomment this line for problems mod 1e9+7 */
   rtn false;
 }
 

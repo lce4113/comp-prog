@@ -1,4 +1,4 @@
-// ––– HEADER –––
+// ––– CodeForces Round #740: Problem F –––
 
 // TEMPLATE {{{
 
@@ -449,38 +449,6 @@ tcT M<T, T> pfac(T a) {
 
 // Other Functions {{{
 
-// search through a sorted vector with binary search
-tcT int se(V<T> a, T b) {
-  if (b < a[0]) rtn 0;
-  int m, l = 0, r = sz(a);
-  while (r - l > 1) {
-    m = (l + r) / 2;
-    if (b == a[m])
-      rtn m;
-    else if (b > a[m])
-      l = m;
-    else
-      r = m;
-  }
-  rtn r;
-}
-
-// get the lower bound of se
-tcT int lse(V<T> a, T b) {
-  int c = se(a, b);
-  c--;
-  while (a[c] == b && c >= 0) c--;
-  rtn(c + 1);
-}
-
-// get the upper bound of se
-tcT int use(V<T> a, T b) {
-  int c = se(a, b);
-  c++;
-  while (a[c] == b && c < sz(a)) c++;
-  rtn(c - 1);
-}
-
 // add indices to a vector/array
 tcT V<P<T, int>> addind(V<T> a) {
   V<P<T, int>> b;
@@ -522,12 +490,11 @@ tcTU void fill(V<T> &a, U b) { each(a, x) fill(x, b); }
 tcT bool eq(T a, T b, T eps = 0.00001) { rtn abs(a - b) < eps; }
 
 // swap two variables
-#define swap(a, b) \
-  {                \
-    auto tmp = a;  \
-    a = b;         \
-    b = tmp;       \
-  }
+tcT void swap(T &a, T &b) {
+  T tmp = a;
+  a = b;
+  b = tmp;
+}
 
 // get the number of even and odd numbers in a vector/array
 tcT pi EO(V<T> a) {
@@ -792,13 +759,13 @@ int32_t main() {
 // Uncomment for integer overflow
 /* #define int ll */
 
-bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+bool is_mod() {
+  /* rtn true; // Uncomment this line for problems mod 1e9+7 */
   rtn false;
 }
 
-bool is_mod() {
-  /* rtn true; // Uncomment this line for problems mod 1e9+7 */
+bool TC() {
+  /* rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
