@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,20 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n;
+  in(n);
 
+  str a;
+  in(a);
+
+  FOR(i, 0, n) {
+    if (a[i] == 'U')
+      a[i] = 'D';
+    else if (a[i] == 'D')
+      a[i] = 'U';
+  }
+
+  out(a);
 }
 
 /* stuff you should look for

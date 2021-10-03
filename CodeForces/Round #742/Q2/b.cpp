@@ -790,10 +790,10 @@ int32_t main() {
 // ––– CODE –––
 
 // Uncomment for integer overflow
-/* #define int ll */
+#define int ll
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -802,8 +802,38 @@ bool is_mod() {
   rtn false;
 }
 
-void solve(int32_t T) {
+int xorn1(int n) {
+  int x = 0;
+  FOR(i, 1, n) x ^= i;
+  rtn x;
+}
 
+int xorn2(int n) {
+  int x;
+  if (n % 4 == 1)
+    x = (n - 1);
+  else if (n % 4 == 2)
+    x = 1;
+  else if (n % 4 == 3)
+    x = n;
+  else
+    x = 0;
+  rtn x;
+}
+
+void solve(int32_t T) {
+  int a, b;
+  in(a, b);
+
+  /* out(n, xorn1(n), xorn2(n)); */
+
+  int y = xorn2(a) ^ b;
+  if (y == 0)
+    out(a);
+  else if (y == a)
+    out(a + 2);
+  else
+    out(a + 1);
 }
 
 /* stuff you should look for

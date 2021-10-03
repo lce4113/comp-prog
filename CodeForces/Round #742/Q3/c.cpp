@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,14 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n;
+  in(n);
 
+  vi N = dg(n);
+  int a = 0, b = 0;
+  FOR(i, 0, sz(N), 2) a += N[i] * exp(10, i / 2);
+  FOR(i, 1, sz(N), 2) b += N[i] * exp(10, i / 2);
+  out((a + 1) * (b + 1) - 2);
 }
 
 /* stuff you should look for
