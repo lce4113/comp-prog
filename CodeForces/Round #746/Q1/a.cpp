@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,27 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n, h;
+  in(n, h);
 
+  V<int> a(n);
+  in(a);
+
+  rsor(a);
+
+  int x = a[0];
+  int y = a[1];
+
+  int ans = 2 * (h / (x + y));
+  int z = h % (x + y);
+
+  if (z > x) {
+    ans += 2;
+  } else if (z != 0) {
+    ans++;
+  }
+
+  out(ans);
 }
 
 /* stuff you should look for

@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,10 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int l, r;
+  in(l, r);
 
+  out(min((r - 1) / 2, r - l));
 }
 
 /* stuff you should look for

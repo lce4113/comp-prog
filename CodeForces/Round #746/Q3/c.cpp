@@ -802,9 +802,7 @@ bool is_mod() {
   rtn false;
 }
 
-void solve(int32_t T) {
-
-}
+void solve(int32_t T) { out(pfac(40)); }
 
 /* stuff you should look for
  * int overflow, array bounds

@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,47 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n, p;
+  in(n, p);
 
+  V<int> a(n);
+  in(a);
+
+  vi b = a;
+  sor(b);
+
+  mvi c, d;
+  FOR(i, 0, n) {
+    if (a[i] == b[i]) continue;
+    c[a[i]].pb(i);
+    d[b[i]].pb(i);
+  }
+
+  /* out(c, d); */
+
+  each(c, x) {
+    vi y = x.s;
+    vi z = d[x.f];
+    /* out(y, z); */
+    FOR(i, 0, sz(y)) {
+      int e = y[i];
+      int g = z[i];
+      /* if (e == g) continue; */
+      if (!(e - 0 >= p || n - 1 - e >= p)) {
+        /* out(x.f, e, g); */
+        goto a;
+      }
+      if (!(g - 0 >= p || n - 1 - g >= p)) {
+        /* out(x.f, g, e); */
+        goto a;
+      }
+    }
+  }
+
+  out("Yes");
+  rtn;
+a:
+  out("No");
 }
 
 /* stuff you should look for

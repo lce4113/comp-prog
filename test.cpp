@@ -803,14 +803,25 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
-  str a = "", b = "";
-  char x;
-  for (int i = 0; cin >> x; i++) {
-    if (i % 3 == 2) b += x;
-    else a += x;
+  int a, b;
+  in(a, b);
+
+  int c = 0, d = 0;
+  while (a >= c && b >= c) {
+    if (d) {
+      b -= c;
+    } else {
+      a -= c;
+    }
+    c++;
+    d = 1 - d;
   }
-  out(a);
-  out(b);
+
+  if (!d) {
+    out("Valera");
+  } else {
+    out("Vladik");
+  }
 }
 
 /* stuff you should look for

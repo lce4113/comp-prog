@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,70 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n;
+  in(n);
 
+  str a;
+  in(a);
+
+  str b = "14689";
+  FOR(i, 0, n) {
+    FOR(k, 0, 5) {
+      if (a[i] == b[k]) {
+        out(1);
+        out(a[i]);
+        rtn;
+      }
+    }
+  }
+
+  FOR(i, 0, n) {
+    FOR(k, i + 1, n) {
+      if (a[i] == a[k]) {
+        cout << 2 << "\n" << a[i] << a[i] << "\n";
+        rtn;
+      }
+    }
+  }
+
+  FOR(i, 0, n) {
+    FOR(k, i + 1, n) {
+      str y = "";
+      y += a[i];
+      y += a[k];
+      int z = stoi(y);
+      /* out(z); */
+      if (sz(pfac(z)) > 1 || pfac(z).begin()->second > 1) {
+        /* if (z != "23" && z != "29" && z != "37" && z != "53" && z != "59" &&
+         */
+        /*     z != "73" && z != "79" && z != "97") { */
+        out(2);
+        out(z);
+        rtn;
+      }
+    }
+  }
+
+  /* int ans = 100000; */
+  /* str anss = ""; */
+  /* FOR(i, 1, exp(2, n)) { */
+  /*   int x = i; */
+  /*   str y = ""; */
+  /*   int k = 0; */
+  /*   while (x > 0) { */
+  /*     if (x % 2) y += a[k]; */
+  /*     k++, x /= 2; */
+  /*   } */
+  /*   int z = stoi(y); */
+  /*   if (sz(pfac(z)) > 1 || pfac(z).begin()->second > 1) { */
+  /*     if (sz(y) < ans) { */
+  /*       ans = sz(y); */
+  /*       anss = y; */
+  /*     } */
+  /*   } */
+  /* } */
+  /* out(ans); */
+  /* out(anss); */
 }
 
 /* stuff you should look for
