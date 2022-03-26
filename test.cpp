@@ -803,25 +803,26 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
-  int a, b;
-  in(a, b);
+  int n;
+  in(n);
 
-  int c = 0, d = 0;
-  while (a >= c && b >= c) {
-    if (d) {
-      b -= c;
-    } else {
-      a -= c;
+  V<int> a(n);
+  in(a);
+
+  M<int, pi> b;
+  FOR(i, 0, n) {
+    if (!b.count(a[i])) {
+      b[a[i]] = {1, i % 2};
+      continue;
     }
-    c++;
-    d = 1 - d;
+    if (i % 2 != b[a[i]].s) {
+      b[a[i]].f++;
+      b[a[i]].s = i % 2;
+    }
   }
 
-  if (!d) {
-    out("Valera");
-  } else {
-    out("Vladik");
-  }
+  each(b, x) cout << x.s.f << ' ';
+  cout << '\n';
 }
 
 /* stuff you should look for

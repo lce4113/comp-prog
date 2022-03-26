@@ -1,22 +1,10 @@
 // ––– "Qpwoeirut And Grid" - Fastest TLE Solution –––
 
 #include <bits/stdc++.h>
-
 using namespace std;
-
-#define f first
-#define s second
-#define mp make_pair
-#define pb push_back
-using str = string;
 using ll = long long;
-using pi = pair<int, int>;
-using pl = pair<ll, ll>;
-using vi = vector<int>;
-using vl = vector<ll>;
 
-int main()
-{
+int main() {
   cin.tie(0)->sync_with_stdio(0);
 
   int t;
@@ -25,30 +13,31 @@ int main()
     int n;
     cin >> n;
 
-    ll pfs_a[n + 1], pfs_b[n + 1], half_sum = 0;
-    pfs_a[0] = 0, pfs_b[0] = 0;
+    vector<ll> pfs_a, pfs_b;
+    pfs_a.push_back(0), pfs_b.push_back(0);
+    ll half_sum = 0;
     for (int i = 0; i < n; i++) {
       int x;
       cin >> x;
-      pfs_a[i + 1] = pfs_a[i] + x;
+      pfs_a.push_back(pfs_a[i] + x);
       half_sum += x;
     }
     for (int i = 0; i < n; i++) {
       int x;
       cin >> x;
-      pfs_b[i + 1] = pfs_b[i] + x;
+      pfs_b.push_back(pfs_b[i] + x);
       half_sum += x;
     }
     half_sum /= 2;
 
-    set<ll> asdf;
+    set<ll> matches;
     for (int i = 0; i <= n; i++) {
-      asdf.insert(half_sum - pfs_a[i]);
+      matches.insert(half_sum - pfs_a[i]);
     }
 
     int ans = 0;
     for (int i = 0; i <= n; i++) {
-      ans += asdf.count(pfs_b[i]);
+      ans += matches.count(pfs_b[i]);
     }
 
     cout << ans << '\n';
