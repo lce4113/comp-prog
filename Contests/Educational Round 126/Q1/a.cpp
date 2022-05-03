@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,19 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n;
+  in(n);
 
+  V<int> a(n), b(n);
+  in(a, b);
+
+  ll ans = 0;
+  FOR(i, 0, n - 1) {
+    ans += abs(min(a[i], b[i]) - min(a[i + 1], b[i + 1]));
+    ans += abs(max(a[i], b[i]) - max(a[i + 1], b[i + 1]));
+  }
+
+  out(ans);
 }
 
 /* stuff you should look for

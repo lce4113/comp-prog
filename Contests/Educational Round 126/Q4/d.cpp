@@ -803,7 +803,31 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  ll n, k;
+  in(n, k);
 
+  V<ll> a(n);
+  in(a);
+
+  ll ans = 0;
+  ROF(i, n - k+1, 0) {
+    if (a[i + k-1] < 0) continue;
+    ll x = ceil((db)(a[i + k-1]) / k);
+    a[i + 1] -= x * 2;
+    a[i] -= x;
+    ans += x;
+  }
+  if (a[1] > 0) {
+    ll x = ceil((db)a[1] / 2);
+    ans += x;
+    a[0] -= x * 2;
+  }
+  if (a[0] > 0) {
+    ll x = a[0];
+    ans += x;
+    a[0] -= x;
+  }
+  out(ans);
 }
 
 /* stuff you should look for

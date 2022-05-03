@@ -803,7 +803,23 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  int n;
+  in(n);
 
+  V<int> a(n);
+  in(a);
+
+  FOR(i, 0, n) {
+    int ans = 1e9;
+    FOR(k, 0, 16) {
+      int x = exp(2, k);
+      int y = x - (1 + (a[i] - 1) % x);
+      ans = min(ans, y + 15 - k);
+    }
+    /* cout << ans << ' '; */
+    out(a[i], ans);
+  }
+  cout << '\n';
 }
 
 /* stuff you should look for

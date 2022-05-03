@@ -793,7 +793,7 @@ int32_t main() {
 /* #define int ll */
 
 bool TC() {
-  /* rtn true; // Uncomment this line for multiple test cases */
+  rtn true; // Uncomment this line for multiple test cases */
   rtn false;
 }
 
@@ -803,7 +803,41 @@ bool is_mod() {
 }
 
 void solve(int32_t T) {
+  ll n;
+  in(n);
 
+  V<ll> a(n);
+  in(a);
+
+  ll m = max(a), o = 0, e = 0;
+  FOR(i, 0, n) {
+    ll x = m - a[i];
+    o += x % 2, e += x / 2;
+  }
+  ll y = max(o * 2 - 1, e * 2);
+  if (e > o) {
+    ll g = (e - o) / 3, h = ceil((db)(e - o) / 3);
+    ll G = max((o + 2 * g) * 2 - 1, (e - g) * 2);
+    ll H = max((o + 2 * h) * 2 - 1, (e - h) * 2);
+    y = min(G, H);
+  }
+
+  m = max(a) + 1, o = 0, e = 0;
+  FOR(i, 0, n) {
+    ll x = m - a[i];
+    o += x % 2, e += x / 2;
+  }
+  ll z = max(o * 2 - 1, e * 2);
+  if (e > o) {
+    ll g = (e - o) / 3, h = ceil((db)(e - o) / 3);
+    ll G = max((o + 2 * g) * 2 - 1, (e - g) * 2);
+    ll H = max((o + 2 * h) * 2 - 1, (e - h) * 2);
+    z = min(G, H);
+  }
+
+  /* out(y, z); */
+  ll ans = min(y, z);
+  out(ans);
 }
 
 /* stuff you should look for
