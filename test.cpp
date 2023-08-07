@@ -512,6 +512,7 @@ tcTU void fill(V<T> &a, U b) { each(a, x) fill(x, b); }
 
 // std io / file io
 #define stdIO() cin.tie(0)->sync_with_stdio(0)
+
 #define fileIO(f)              \
   {                            \
     ifstream cin(f + ".in");   \
@@ -802,27 +803,53 @@ bool is_mod() {
   rtn false;
 }
 
+bool eq(vi a, vi b) {
+  for (int i = 0; i < 4; i++) {
+    if (a[i] != b[i]) return false;
+  }
+  return true;
+}
+vi run(vi a) {
+  int y = 0;
+  vi b = a;
+  for (int i = 0; i < 4; i++)
+    if (b[i] >= 3) y++;
+  for (int i = 0; i < 4; i++) {
+    if (b[i] >= 3) b[i] -= 4;
+    b[i] += y;
+  }
+  return b;
+}
+int check(vi a) {
+  vi start;
+  for (auto z : {a[0], a[1], a[2], a[3]}) start.pb(z);
+  a = run(a);
+  int i = 1;
+  while (!eq(start, a) && i < 100) a = run(a), i++;
+  return i;
+}
+
 void solve(int32_t T) {
-  int n;
-  in(n);
-
-  V<int> a(n);
-  in(a);
-
-  M<int, pi> b;
-  FOR(i, 0, n) {
-    if (!b.count(a[i])) {
-      b[a[i]] = {1, i % 2};
-      continue;
-    }
-    if (i % 2 != b[a[i]].s) {
-      b[a[i]].f++;
-      b[a[i]].s = i % 2;
+  int ans = 0;
+  set<pair<vi, int>> ans2;
+  FOR(a, 0, 6) {
+    FOR(b, 0, 6) {
+      FOR(c, 0, 6) {
+        FOR(d, 0, 6) {
+          vi x;
+          for (auto z : {a, b, c, d}) x.pb(z);
+          sor(x);
+          int y = check(x);
+          if (y > 50) continue;
+          if (y > 1) ans2.ins({x, y});
+          /* if (y > ans) ans = y, ans2.clear(); */
+          /* if (y == ans) ans2.ins(x); */
+        }
+      }
     }
   }
-
-  each(b, x) cout << x.s.f << ' ';
-  cout << '\n';
+  /* out(ans); */
+  out(ans2);
 }
 
 /* stuff you should look for

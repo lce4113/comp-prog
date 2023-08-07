@@ -18,10 +18,11 @@ for (( i = 0; i < $NUMBER_OF_PROBLEMS; i++ )); do
   LETTER="${letters[$i]}"
   FILE_NAME="${LETTER,,}"
   DIR_NAME="Q$NUM"
-  HEADER="CodeForces $CONTEST: Problem $LETTER"
+  HEADER="// CodeForces $CONTEST: Problem $LETTER"
 
-  cp -R "$CP_PATH" "$DIR_NAME"
-  mv "$DIR_NAME/main.cpp" "$DIR_NAME/$FILE_NAME.cpp"
-  sed -i '' "s/HEADER/$HEADER/" "$DIR_NAME/$FILE_NAME.cpp"
+  mkdir "$DIR_NAME"
+  touch "$DIR_NAME/$FILE_NAME.cpp"
+  echo "$HEADER" > "$DIR_NAME/$FILE_NAME.cpp"
+  touch "$DIR_NAME/main.in"
 
 done

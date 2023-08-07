@@ -512,6 +512,7 @@ tcTU void fill(V<T> &a, U b) { each(a, x) fill(x, b); }
 
 // std io / file io
 #define stdIO() cin.tie(0)->sync_with_stdio(0)
+
 #define fileIO(f)              \
   {                            \
     ifstream cin(f + ".in");   \

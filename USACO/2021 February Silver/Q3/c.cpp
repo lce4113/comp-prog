@@ -3,104 +3,56 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Data Type Shortcuts
-
-using str = string;
-using ll = long long;
-using db = double;
-using ld = long double;
-
-using pi = pair<int, int>;
-using pl = pair<ll, ll>;
+#define int long long
 using vi = vector<int>;
-using vc = vector<char>;
-using vs = vector<str>;
-using vl = vector<ll>;
-using mp = map<int, int>;
-using mset = multiset<int>;
-using pq = priority_queue<int>;
-using rpq = priority_queue<int, vi, greater<int>>;
-using dq = deque<int>;
-
-// Other Shortcuts
-
-#define f first
-#define s second
 #define pb push_back
-#define pf push_front
 
-// Functions
+int n;
+vector<vi> grid;
 
-#define init(arr)                               \
-  {                                             \
-    int arrSize = sizeof(arr) / sizeof(arr[0]); \
-    for (int i = 0; i < arrSize; i++) {         \
-      arr[i] = 0;                               \
-    }                                           \
+int rowcount(vi row) {
+  int consec = 0, ans = 0;
+  for (int i = 0; i < row.size(); i++) {
+    if (row[i])
+      consec++;
+    else
+      consec = 0;
+    ans += consec;
   }
-
-#define ins(map, elt)     \
-  {                       \
-    if (map.count(elt)) { \
-      map[elt]++;         \
-    } else {              \
-      map[elt] = 1;       \
-    }                     \
-  }
-
-// ––– CODE –––
-
-#define int ll
-
-const int MAXN = 505;
-
-int n, a[MAXN][MAXN];
-
-int f(int x)
-{
-  int ans = 0;
-
-  for (int i = 0; i < n; i++) {
-    int m[n];
-    for (int k = 0; k < n; k++) {
-      m[k] = -1;
-      for (int l = i; l >= 0; l--) {
-        if (a[l][k] < x) {
-          m[k] = l;
-          break;
-        }
-      }
-
-      for (int l = 0; l < k; l++) {
-        m[l] = max(m[l], m[k]);
-      }
-
-      int asdf = 0;
-      for (int l = 0; l <= k; l++) {
-        asdf += (i - m[l]);
-      }
-
-      ans += asdf;
-    }
-  }
-
   return ans;
 }
 
-signed main()
-{
-  cin.tie(0)->sync_with_stdio(0);
-
-  cin >> n;
-
+int count(int mn) {
+  vector<vi> ok = grid;
   for (int i = 0; i < n; i++) {
     for (int k = 0; k < n; k++) {
-      int x;
-      cin >> x;
-      a[i][k] = x;
+      ok[i][k] = (ok[i][k] >= mn);
     }
   }
 
-  int ans = f(100) - f(101);
+  int ans = 0;
+  for (int i = 0; i < n; i++) {
+    vi curr(n, 1);
+    for (int k = i; k < n; k++) {
+      for (int i = 0; i < n; i++) curr[i] &= ok[k][i];
+      ans += rowcount(curr);
+      /* cout << rowcount(curr) << ' '; */
+    }
+    /* cout << '\n'; */
+  }
+  /* cout << '\n'; */
+  return ans;
+}
+
+int32_t main() {
+  cin >> n;
+  for (int i = 0; i < n; i++) {
+    vector<int> r(n);
+    grid.pb(r);
+    for (int k = 0; k < n; k++) cin >> grid[i][k];
+  }
+
+  int ans = count(100) - count(101);
+  /* cout << count(100) << ' ' << count(101) << '\n'; */
   cout << ans << '\n';
 }
