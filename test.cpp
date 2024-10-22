@@ -803,53 +803,81 @@ bool is_mod() {
   rtn false;
 }
 
-bool eq(vi a, vi b) {
-  for (int i = 0; i < 4; i++) {
-    if (a[i] != b[i]) return false;
+const int n = 7;
+set<int> **rec(set<int> **sets, int x, int y, int val) {
+  for (int i = 0; i < 8; i++) {
+    int x2 = x + dx2[i], y2 = y + dy2[i];
+    if (x2 >= n || x2 < 0) continue;
+    if (y2 >= n || y2 < 0) continue;
+    if (sets[x2][y2].empty()) continue;
+    sets[x2][y2].erase(val);
+    if (sets[x2][y2].empty()) {
+      sets[0][0].insert(-2);
+      return sets;
+    }
   }
-  return true;
-}
-vi run(vi a) {
-  int y = 0;
-  vi b = a;
-  for (int i = 0; i < 4; i++)
-    if (b[i] >= 3) y++;
-  for (int i = 0; i < 4; i++) {
-    if (b[i] >= 3) b[i] -= 4;
-    b[i] += y;
+  for (auto el : sets[x][y]) {
+    if (el == val) continue;
+    sets[x][y].erase(val);
   }
-  return b;
-}
-int check(vi a) {
-  vi start;
-  for (auto z : {a[0], a[1], a[2], a[3]}) start.pb(z);
-  a = run(a);
-  int i = 1;
-  while (!eq(start, a) && i < 100) a = run(a), i++;
-  return i;
-}
-
-void solve(int32_t T) {
-  int ans = 0;
-  set<pair<vi, int>> ans2;
-  FOR(a, 0, 6) {
-    FOR(b, 0, 6) {
-      FOR(c, 0, 6) {
-        FOR(d, 0, 6) {
-          vi x;
-          for (auto z : {a, b, c, d}) x.pb(z);
-          sor(x);
-          int y = check(x);
-          if (y > 50) continue;
-          if (y > 1) ans2.ins({x, y});
-          /* if (y > ans) ans = y, ans2.clear(); */
-          /* if (y == ans) ans2.ins(x); */
+  for (int i = 0; i < n; i++) {
+    for (int k = 0; k < n; k++) {
+      if (sets[i][k].size() >= 2) {
+        for (auto el : sets[i][k]) {
+          set<int> **ans = rec(sets, x, y, el);
+          if (ans[0][0].count(-2)) continue;
+          return ans;
         }
       }
     }
   }
-  /* out(ans); */
-  out(ans2);
+  sets[0][0].insert(-2);
+  return sets;
+}
+
+set<int> **rec_wrap(set<int> sets[n][n]) {
+  for (auto x : {1, 3, 5}) {
+    set<int> **ans = rec(sets, 0, 0, x);
+    if (ans[0][0].count(-2)) continue;
+    return ans;
+  }
+}
+
+void solve(int32_t T) {
+  int array[n][n] = {{0, 0, 0, 0, 0, 0, 0},   {1, 0, 1, 0, 3, 0, 5},
+                     {0, 0, 0, -1, 0, 0, 0},  {-1, 0, 1, 1, 3, 5, 0},
+                     {0, 0, 0, 0, -1, 0, -1}, {0, -1, 0, 0, 0, 0, 0},
+                     {5, 0, 0, 5, 0, 0, 0}};
+  set<int> **sets;
+
+  for (int i = 0; i < n; i++) {
+    for (int k = 0; k < n; k++) {
+      if (array[i][k] == -1) continue;
+      if (array[i][k] == 1) {
+        sets[i][k].insert(1);
+        continue;
+      }
+      if (array[i][k] == 3) {
+        sets[i][k].insert(3);
+        continue;
+      }
+      if (array[i][k] == 5) {
+        sets[i][k].insert(5);
+        continue;
+      }
+      sets[i][k].insert(1);
+      sets[i][k].insert(3);
+      sets[i][k].insert(5);
+    }
+  }
+
+  set<int> **ans = rec(sets, 0, 0, 1);
+  for (int i = 0; i < n; i++) {
+    for (int k = 0; k < n; k++) {
+      cout << *ans[i][k].begin() << ' ';
+    }
+    cout << '\n';
+  }
 }
 
 /* stuff you should look for

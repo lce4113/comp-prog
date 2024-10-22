@@ -8,6 +8,7 @@ NUMBER_OF_PROBLEMS=${NUMBER_OF_PROBLEMS:-6}
 
 mkdir "$CONTEST"
 cd "$CONTEST"
+touch "main.in"
 
 CP_PATH=~/Google\ Drive/OmMahesh/Programming/Comp\ Prog/Templates/std\ io
 
@@ -17,12 +18,9 @@ for (( i = 0; i < $NUMBER_OF_PROBLEMS; i++ )); do
   NUM=$((i+1))
   LETTER="${letters[$i]}"
   FILE_NAME="${LETTER,,}"
-  DIR_NAME="Q$NUM"
   HEADER="// CodeForces $CONTEST: Problem $LETTER"
 
-  mkdir "$DIR_NAME"
-  touch "$DIR_NAME/$FILE_NAME.cpp"
-  echo "$HEADER" > "$DIR_NAME/$FILE_NAME.cpp"
-  touch "$DIR_NAME/main.in"
+  touch "$FILE_NAME.cpp"
+  echo "$HEADER" > "$FILE_NAME.cpp"
 
 done
