@@ -3,6 +3,9 @@
 .ccls-cache/
 .clang-format
 
-# Compiled Files
+# Compiled files
 output
-a.out
+*.out
+
+# Icon files
+Icon\?
