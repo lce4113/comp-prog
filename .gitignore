@@ -1,11 +1,12 @@
-# LSP stuff
-.ccls
-.ccls-cache/
-.clang-format
+# Track only .cpp and .md
+*
+!*.cpp
+!*.md
+!*/
 
-# Compiled files
-output
-*.out
-
-# Icon files
-Icon\?
+# Not for Github
+EMERGENCY/
+Polygon\ Problems/
+Templates/
+ACM\ ICPC/
+test*.*

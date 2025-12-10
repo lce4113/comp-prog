@@ -1,0 +1,28 @@
+// CSES Sorting & Searching: Maximum Subarray Sum
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define f first
+#define s second
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &x : a) cin >> x;
+    int sm = 0, mn = 0, ans = -1e18;
+    for (auto x : a) {
+        sm += x;
+        ans = max(ans, sm - mn);
+        mn = min(mn, sm);
+    }
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    int t = 1;
+    // cin >> t;
+    while (t--) solve();
+}

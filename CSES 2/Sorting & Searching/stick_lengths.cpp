@@ -1,0 +1,25 @@
+// CSES Sorting & Searching: Stick Lengths
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define f first
+#define s second
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &x : a) cin >> x;
+    sort(a.begin(), a.end());
+    int ans = 0;
+    for (auto x : a) ans += abs(x - a[n / 2]);
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    int t = 1;
+    // cin >> t;
+    while (t--) solve();
+}
