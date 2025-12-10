@@ -1,4 +1,4 @@
-// ––– CSES Room Allocation –––
+// CSES Sorting & Searching: Room Allocation
 
 #include <bits/stdc++.h>
 

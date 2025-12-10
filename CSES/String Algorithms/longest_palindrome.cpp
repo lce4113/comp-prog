@@ -1,4 +1,4 @@
-// ––– CSES Longest Palindrome –––
+// CSES String Algorithms: Longest Palindrome
 
 #include <bits/stdc++.h>
 using namespace std;

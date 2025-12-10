@@ -1,4 +1,4 @@
-// ––– CSES Weird Algorithm –––
+// CSES Introductory Problems: Weird Algorithm
 
 #include <bits/stdc++.h>
 

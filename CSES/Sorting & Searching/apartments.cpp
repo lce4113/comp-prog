@@ -1,4 +1,4 @@
-// ––– CSES Apartments –––
+// CSES Sorting & Searching: Apartments
 
 #include <bits/stdc++.h>
 

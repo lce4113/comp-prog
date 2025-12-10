@@ -1,4 +1,4 @@
-// ––– CSES Distinct Numbers –––
+// CSES Sorting & Searching: Distinct Numbers
 
 #include <bits/stdc++.h>
 

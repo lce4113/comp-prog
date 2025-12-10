@@ -1,4 +1,4 @@
-// ––– CSES Traffic Lights –––
+// CSES Sorting & Searching: Traffic Lights
 
 #include <bits/stdc++.h>
 
@@ -40,6 +40,4 @@ int main()
 
     cout << *dists.rbegin() << ' ';
   }
-
-
 }

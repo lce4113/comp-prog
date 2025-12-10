@@ -1,4 +1,4 @@
-// ––– CSES Dynamic Range Sum Queries –––
+// CSES Range Queries: Dynamic Range Sum Queries
 
 // TEMPLATE {{{
 

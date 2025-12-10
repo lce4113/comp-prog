@@ -1,4 +1,4 @@
-// ––– CSES Concert Tickets –––
+// CSES Sorting & Searching: Concert Tickets
 
 #include <iostream>
 #include <string>
