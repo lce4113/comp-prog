@@ -4,8 +4,6 @@
 using namespace std;
 
 #define int long long
-#define f first
-#define s second
 
 void solve() {
     int n, k;
